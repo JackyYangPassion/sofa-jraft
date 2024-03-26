@@ -221,7 +221,7 @@ public class StoreEngine implements Lifecycle<StoreEngineOptions>, Describer {
             DescriberManager.getInstance().addDescriber((Describer) this.rawKVStore);
         }
         // init all region engine
-        if (!initAllRegionEngine(opts, store)) {
+        if (!initAllRegionEngine(opts, store)) {//重点关注：实现 sharding 和HBase region 同名
             LOG.error("Fail to init all [RegionEngine].");
             return false;
         }

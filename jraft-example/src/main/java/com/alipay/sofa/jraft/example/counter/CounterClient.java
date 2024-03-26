@@ -52,7 +52,7 @@ public class CounterClient {
         final CliClientServiceImpl cliClientService = new CliClientServiceImpl();
         cliClientService.init(new CliOptions());
 
-        if (!RouteTable.getInstance().refreshLeader(cliClientService, groupId, 1000).isOk()) {
+        if (!RouteTable.getInstance().refreshLeader(cliClientService, groupId, 100000).isOk()) {
             throw new IllegalStateException("Refresh leader failed");
         }
 
