@@ -525,7 +525,7 @@ public class RocksRawKVStore extends BatchRawKVStore<RocksDBOptions> implements 
                         final KVOperation op = kvState.getOp();
                         batch.put(op.getKey(), op.getValue());
                     }
-                    this.db.write(this.writeOptions, batch);
+                    this.db.write(this.writeOptions, batch);//直接DB Write
                     for (final KVState kvState : segment) {
                         setSuccess(kvState.getDone(), Boolean.TRUE);
                     }

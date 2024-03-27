@@ -380,7 +380,12 @@ public class RaftRawKVStore implements RawKVStore {
             closure.run(new Status(RaftError.EPERM, "Not leader"));
             return;
         }
-        final Task task = new Task();//TODO: 此处重点关注是如何通过JRaft RocksDB OR MemDB ?
+
+        //TODO: 此处重点关注是如何通过JRaft RocksDB OR MemDB ?
+        /**
+         * node.apply() 调用的 KVStoreStateMachine.onApply
+         */
+        final Task task = new Task();
         task.setData(ByteBuffer.wrap(Serializers.getDefault().writeObject(op)));
         task.setDone(new KVClosureAdapter(closure, op));
         this.node.apply(task);

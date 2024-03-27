@@ -79,6 +79,11 @@ public class KVStoreStateMachine extends StateMachineAdapter {
         this.batchWriteHistogram = KVMetrics.histogram(STATE_MACHINE_BATCH_WRITE, regionStr);
     }
 
+    /**
+     * 重点调用RocksDB KV Store 实现方法
+     * rawKVStore = new RocksRawKVStore()
+     * @param it
+     */
     @Override
     public void onApply(final Iterator it) {
         int index = 0;
