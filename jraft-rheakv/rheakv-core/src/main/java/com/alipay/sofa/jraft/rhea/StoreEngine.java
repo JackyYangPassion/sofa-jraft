@@ -125,6 +125,18 @@ public class StoreEngine implements Lifecycle<StoreEngineOptions>, Describer {
         this.stateListenerContainer = Requires.requireNonNull(stateListenerContainer, "stateListenerContainer");
     }
 
+    /**
+     *
+     * 1. init region options
+     * 2. init store
+     * 3. init executors
+     * 4. init rpc executors
+     * 5. init metrics
+     * 6. init db store
+     * 7. init all region engine
+     * @param opts
+     * @return
+     */
     @Override
     public synchronized boolean init(final StoreEngineOptions opts) {
         if (this.started) {

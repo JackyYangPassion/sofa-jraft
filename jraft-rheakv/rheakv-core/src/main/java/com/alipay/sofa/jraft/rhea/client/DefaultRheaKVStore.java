@@ -191,8 +191,7 @@ import com.lmax.disruptor.dsl.Disruptor;
  */
 public class DefaultRheaKVStore implements RheaKVStore {
 
-    private static final Logger                LOG                    = LoggerFactory
-                                                                          .getLogger(DefaultRheaKVStore.class);
+    private static final Logger  LOG = LoggerFactory.getLogger(DefaultRheaKVStore.class);
 
     static {
         ExtSerializerSupports.init();
@@ -214,6 +213,17 @@ public class DefaultRheaKVStore implements RheaKVStore {
 
     private volatile boolean                   started;
 
+    /**
+     * init 流程
+     * 1. init placement driver
+     * 2. init compress strategies
+     * 3. init store engine
+     * 4. init DefaultRheaKVRpcService
+     *
+     *
+     * @param opts
+     * @return
+     */
     @Override
     public synchronized boolean init(final RheaKVStoreOptions opts) {
         if (this.started) {

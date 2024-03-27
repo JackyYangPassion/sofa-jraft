@@ -79,6 +79,13 @@ public class RegionEngine implements Lifecycle<RegionEngineOptions>, Describer {
         this.storeEngine = storeEngine;
     }
 
+    /**
+     * 1. init nodeOpts
+     * 2. init RaftGroupService
+     * 3. start RaftGroupService
+     * @param opts
+     * @return
+     */
     @Override
     public synchronized boolean init(final RegionEngineOptions opts) {
         if (this.started) {
@@ -135,7 +142,7 @@ public class RegionEngine implements Lifecycle<RegionEngineOptions>, Describer {
         if (this.node != null) {
             final RawKVStore rawKVStore = this.storeEngine.getRawKVStore();
             final Executor readIndexExecutor = this.storeEngine.getReadIndexExecutor();
-            this.raftRawKVStore = new RaftRawKVStore(this.node, rawKVStore, readIndexExecutor);
+            this.raftRawKVStore = new RaftRawKVStore(this.node, rawKVStore, readIndexExecutor);//RaftRawKVStore 执行raft 机制
             this.metricsRawKVStore = new MetricsRawKVStore(this.region.getId(), this.raftRawKVStore);
             // metrics config
             if (this.regionMetricsReporter == null && metricsReportPeriod > 0) {
